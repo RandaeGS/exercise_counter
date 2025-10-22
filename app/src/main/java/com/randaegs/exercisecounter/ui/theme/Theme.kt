@@ -1,6 +1,5 @@
-package com.example.exercisecounter.ui.theme
+package com.randaegs.exercisecounter.ui.theme
 
-import android.app.Activity
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme

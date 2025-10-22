@@ -1,4 +1,4 @@
-package com.example.exercisecounter
+package com.randaegs.exercisecounter
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -8,11 +8,11 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.exercisecounter.ui.navigation.NavigationEvent
-import com.example.exercisecounter.ui.navigation.Routes
-import com.example.exercisecounter.ui.screens.Home
-import com.example.exercisecounter.ui.screens.Settings
-import com.example.exercisecounter.ui.theme.ExerciseCounterTheme
+import com.randaegs.exercisecounter.ui.navigation.NavigationEvent
+import com.randaegs.exercisecounter.ui.navigation.Routes
+import com.randaegs.exercisecounter.ui.screens.Home
+import com.randaegs.exercisecounter.ui.screens.Settings
+import com.randaegs.exercisecounter.ui.theme.ExerciseCounterTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

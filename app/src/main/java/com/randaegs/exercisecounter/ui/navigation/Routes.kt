@@ -1,4 +1,4 @@
-package com.example.exercisecounter.ui.navigation
+package com.randaegs.exercisecounter.ui.navigation
 
 sealed class Routes(val route: String){
     data object Home: Routes("home")

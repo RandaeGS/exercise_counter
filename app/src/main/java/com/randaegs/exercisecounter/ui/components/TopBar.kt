@@ -1,4 +1,4 @@
-package com.example.exercisecounter.ui.components
+package com.randaegs.exercisecounter.ui.components
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.width
@@ -17,7 +17,7 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.example.exercisecounter.addExerciseCount
+import com.randaegs.exercisecounter.addExerciseCount
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

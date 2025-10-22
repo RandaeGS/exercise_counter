@@ -1,4 +1,4 @@
-package com.example.exercisecounter.models
+package com.randaegs.exercisecounter.models
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

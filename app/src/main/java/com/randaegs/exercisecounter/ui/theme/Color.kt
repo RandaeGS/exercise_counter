@@ -1,4 +1,4 @@
-package com.example.exercisecounter.ui.theme
+package com.randaegs.exercisecounter.ui.theme
 
 import androidx.compose.ui.graphics.Color
 

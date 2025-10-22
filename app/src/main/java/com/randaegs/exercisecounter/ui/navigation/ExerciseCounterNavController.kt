@@ -1,6 +1,4 @@
-package com.example.exercisecounter.ui.navigation
-
-import androidx.compose.runtime.Composable
+package com.randaegs.exercisecounter.ui.navigation
 
 object Destinations {
     const val HOME = "home"

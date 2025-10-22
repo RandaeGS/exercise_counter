@@ -5,11 +5,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.exercisecounter"
+    namespace = "com.randaegs.exercisecounter"
     compileSdk = 36
 
     defaultConfig {
-        applicationId = "com.example.exercisecounter"
+        applicationId = "com.randaegs.exercisecounter"
         minSdk = 33
         targetSdk = 36
         versionCode = 1
@@ -52,6 +52,8 @@ dependencies {
     implementation(libs.androidx.compose.ui.text.google.fonts)
     implementation(libs.androidx.navigation.compose)
     implementation(libs.androidx.room.runtime)
+    implementation(libs.androidx.material3)
+    implementation(libs.androidx.compose.material.icons.core)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

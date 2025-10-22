@@ -1,10 +1,10 @@
-package com.example.exercisecounter.data
+package com.randaegs.exercisecounter.data
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.example.exercisecounter.models.Exercise
+import com.randaegs.exercisecounter.models.Exercise
 
 @Database(entities = [Exercise::class], version = 1)
 abstract class AppDatabase : RoomDatabase() {

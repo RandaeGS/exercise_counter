@@ -1,11 +1,10 @@
-package com.example.exercisecounter.ui.screens
+package com.randaegs.exercisecounter.ui.screens
 
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
-import androidx.navigation.NavController
-import com.example.exercisecounter.ui.components.ExerciseCounterScaffold
-import com.example.exercisecounter.ui.components.TopBar
-import com.example.exercisecounter.ui.navigation.NavigationEvent
+import com.randaegs.exercisecounter.ui.components.ExerciseCounterScaffold
+import com.randaegs.exercisecounter.ui.components.TopBar
+import com.randaegs.exercisecounter.ui.navigation.NavigationEvent
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

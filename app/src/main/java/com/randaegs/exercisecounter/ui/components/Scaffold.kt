@@ -1,4 +1,4 @@
-package com.example.exercisecounter.ui.components
+package com.randaegs.exercisecounter.ui.components
 
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.material3.Scaffold
