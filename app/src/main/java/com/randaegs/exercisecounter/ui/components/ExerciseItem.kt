@@ -21,7 +21,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import com.randaegs.exercisecounter.addExerciseCount
 import com.randaegs.exercisecounter.models.Exercise
 import com.randaegs.exercisecounter.ui.theme.Typography
 import com.randaegs.exercisecounter.ui.theme.danger
@@ -65,7 +64,7 @@ fun ExerciseItem(exercise: Exercise) {
                         disabledContainerColor = IconButtonDefaults.iconButtonColors().disabledContainerColor,
                         disabledContentColor = IconButtonDefaults.iconButtonColors().disabledContentColor
                     ),
-                    onClick = { addExerciseCount() }
+                    onClick = { subtractExerciseQuantity(exercise) }
                 ) {
                     Row {
                         Icon(
@@ -79,4 +78,8 @@ fun ExerciseItem(exercise: Exercise) {
         }
 
     }
+}
+
+private fun subtractExerciseQuantity(exercise: Exercise){
+
 }

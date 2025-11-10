@@ -1,5 +1,6 @@
 package com.randaegs.exercisecounter.ui.components
 
+import android.content.Context
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -15,9 +16,14 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
-import com.randaegs.exercisecounter.addExerciseCount
+import com.randaegs.exercisecounter.data.AppDatabase
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -27,6 +33,8 @@ fun TopBar(
     isButtonVisible: Boolean = true,
     modifier: Modifier = Modifier
 ) {
+    val scope = rememberCoroutineScope()
+    val context = LocalContext.current
     TopAppBar(
         colors = TopAppBarDefaults.topAppBarColors(
             containerColor = MaterialTheme.colorScheme.primary
@@ -55,7 +63,10 @@ fun TopBar(
                         disabledContainerColor = IconButtonDefaults.iconButtonColors().disabledContainerColor,
                         disabledContentColor = IconButtonDefaults.iconButtonColors().disabledContentColor
                     ),
-                    onClick = { addExerciseCount() }
+                    onClick = {
+                        scope.launch {
+                            addExerciseCount(context) }
+                        }
                 ) {
                     Icon(
                         imageVector = Icons.Filled.Add,
@@ -65,4 +76,12 @@ fun TopBar(
             }
         }
     )
+}
+
+private suspend fun addExerciseCount(context: Context){
+    withContext(Dispatchers.IO){
+        AppDatabase.getDatabase(context)
+            .exerciseDao()
+            .addAmountToRandomExercise()
+    }
 }
