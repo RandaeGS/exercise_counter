@@ -16,10 +16,15 @@ interface ExerciseDao {
     @Insert
     fun insert(vararg exercise: Exercise)
 
-    @Query("Update exercises " +
-            "set quantity = quantity + increment " +
-            "where id in (select id from exercises order by random() limit 1)")
-    fun addAmountToRandomExercise()
+    @Query("""
+        SELECT * FROM exercises 
+        ORDER BY random() 
+        LIMIT 1
+    """)
+    fun searchRandomExercise() : Exercise
+
+    @Update
+    fun update(vararg exercise: Exercise)
 
     @Delete
     fun delete(exercise: Exercise)

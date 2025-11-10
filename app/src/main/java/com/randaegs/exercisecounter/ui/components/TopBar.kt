@@ -19,8 +19,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.capitalize
 import androidx.compose.ui.unit.dp
 import com.randaegs.exercisecounter.data.AppDatabase
+import com.randaegs.exercisecounter.models.Exercise
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -65,8 +67,9 @@ fun TopBar(
                     ),
                     onClick = {
                         scope.launch {
-                            addExerciseCount(context) }
+                            addExerciseCount(context)
                         }
+                    }
                 ) {
                     Icon(
                         imageVector = Icons.Filled.Add,
@@ -78,10 +81,18 @@ fun TopBar(
     )
 }
 
-private suspend fun addExerciseCount(context: Context){
-    withContext(Dispatchers.IO){
-        AppDatabase.getDatabase(context)
+private suspend fun addExerciseCount(context: Context) {
+    withContext(Dispatchers.IO) {
+        val dao = AppDatabase.getDatabase(context)
             .exerciseDao()
-            .addAmountToRandomExercise()
+        val updatedExercise = dao.searchRandomExercise()
+
+        updatedExercise.quantity += updatedExercise.increment
+        dao.update(updatedExercise)
+        SnackbarController.showAsync(
+            """
+                Added ${updatedExercise.increment} to ${updatedExercise.name.replaceFirstChar { it.uppercase() }}
+            """.trimIndent()
+        )
     }
 }

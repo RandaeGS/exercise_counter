@@ -81,5 +81,5 @@ fun ExerciseItem(exercise: Exercise) {
 }
 
 private fun subtractExerciseQuantity(exercise: Exercise){
-
+    SnackbarController.showAsync("hola")
 }
