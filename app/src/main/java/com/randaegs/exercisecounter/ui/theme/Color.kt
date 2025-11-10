@@ -14,3 +14,5 @@ val dark_primary = Color(0xFF234C6A)
 val dark_secondary = Color(0xFF456882)
 val dark_tertiary = Color(0xFFD2C1B6)
 val dark_background = Color(0xFF1B3C53)
+
+val danger = Color(0xFF842A3B)
