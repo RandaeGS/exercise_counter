@@ -1,5 +1,6 @@
 package com.randaegs.exercisecounter.ui.components
 
+import android.content.Context
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
@@ -17,16 +18,25 @@ import androidx.compose.material3.IconButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
+import com.randaegs.exercisecounter.data.AppDatabase
+import com.randaegs.exercisecounter.data.ExerciseDao
 import com.randaegs.exercisecounter.models.Exercise
 import com.randaegs.exercisecounter.ui.theme.Typography
 import com.randaegs.exercisecounter.ui.theme.danger
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 @Composable
 fun ExerciseItem(exercise: Exercise) {
+    val scope = rememberCoroutineScope()
+    val context = LocalContext.current
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -64,7 +74,11 @@ fun ExerciseItem(exercise: Exercise) {
                         disabledContainerColor = IconButtonDefaults.iconButtonColors().disabledContainerColor,
                         disabledContentColor = IconButtonDefaults.iconButtonColors().disabledContentColor
                     ),
-                    onClick = { subtractExerciseQuantity(exercise) }
+                    onClick = {
+                        scope.launch {
+                            subtractExerciseQuantity(exercise, context)
+                        }
+                    }
                 ) {
                     Row {
                         Icon(
@@ -80,6 +94,18 @@ fun ExerciseItem(exercise: Exercise) {
     }
 }
 
-private fun subtractExerciseQuantity(exercise: Exercise){
-    SnackbarController.showAsync("hola")
+private suspend fun subtractExerciseQuantity(exercise: Exercise, context: Context) {
+    withContext(Dispatchers.IO) {
+        val dao = AppDatabase.getDatabase(context)
+            .exerciseDao()
+        val updated = exercise.copy(
+            quantity = exercise.quantity - exercise.increment
+        )
+        dao.update(updated)
+        SnackbarController.showAsync(
+            """
+        ${exercise.name.replaceFirstChar { it.uppercase() }}: ${exercise.increment} DONE
+    """.trimIndent()
+        )
+    }
 }
