@@ -2,6 +2,7 @@ package com.randaegs.exercisecounter.ui.components
 
 import android.content.Context
 import androidx.compose.foundation.border
+import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
@@ -18,11 +19,18 @@ import androidx.compose.material3.IconButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.hapticfeedback.HapticFeedback
+import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.unit.dp
 import com.randaegs.exercisecounter.data.AppDatabase
 import com.randaegs.exercisecounter.data.ExerciseDao
@@ -37,11 +45,20 @@ import kotlinx.coroutines.withContext
 fun ExerciseItem(exercise: Exercise) {
     val scope = rememberCoroutineScope()
     val context = LocalContext.current
+    val haptics = LocalHapticFeedback.current
+    var contextExerciseId by rememberSaveable { mutableStateOf<Int?>(null)}
     Card(
         modifier = Modifier
             .fillMaxWidth()
             .padding(8.dp)
             .border(width = 0.6.dp, color = Color.White, shape = RoundedCornerShape(size = 10.dp))
+            .combinedClickable(
+                onClick = {},
+                onLongClick = {
+                    haptics.performHapticFeedback(HapticFeedbackType.LongPress)
+                    contextExerciseId = exercise.id
+                },
+            )
     ) {
         Row(
             horizontalArrangement = Arrangement.SpaceBetween,
@@ -91,6 +108,11 @@ fun ExerciseItem(exercise: Exercise) {
             }
         }
 
+        if (contextExerciseId != null){
+            ExerciseActionsSheet {
+                contextExerciseId = null
+            }
+        }
     }
 }
 
