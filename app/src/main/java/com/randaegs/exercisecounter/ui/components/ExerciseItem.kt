@@ -1,6 +1,7 @@
 package com.randaegs.exercisecounter.ui.components
 
 import android.content.Context
+import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.Arrangement
@@ -100,9 +101,10 @@ fun ExerciseItem(exercise: Exercise) {
                     Row {
                         Icon(
                             imageVector = Minus,
-                            contentDescription = "Subtract ${exercise.increment}"
+                            contentDescription = "Subtract ${exercise.increment}",
+                            tint = Color.White
                         )
-                        Text(exercise.increment.toString())
+                        Text(exercise.increment.toString(), color = Color.White)
                     }
                 }
             }

@@ -2,6 +2,7 @@ package com.randaegs.exercisecounter.ui.components
 
 import android.content.Context
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -18,6 +19,7 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.capitalize
 import androidx.compose.ui.unit.dp
@@ -45,6 +47,7 @@ fun TopBar(
             Text(
                 text = title,
                 style = MaterialTheme.typography.titleLarge,
+                color = MaterialTheme.colorScheme.tertiary,
                 modifier = Modifier
                     .clickable(
                         onClick = {
@@ -58,7 +61,8 @@ fun TopBar(
                 FilledIconButton(
                     shape = RoundedCornerShape(size = 10.dp),
                     modifier = Modifier
-                        .width(60.dp),
+                        .width(60.dp)
+                        .padding(end = 5.dp),
                     colors = IconButtonColors(
                         containerColor = MaterialTheme.colorScheme.tertiary,
                         contentColor = MaterialTheme.colorScheme.secondary,
@@ -73,7 +77,7 @@ fun TopBar(
                 ) {
                     Icon(
                         imageVector = Icons.Filled.Add,
-                        contentDescription = "Add count"
+                        contentDescription = "Add count",
                     )
                 }
             }

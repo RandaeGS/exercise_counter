@@ -1,8 +1,10 @@
 package com.randaegs.exercisecounter.ui.screens
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -33,7 +35,9 @@ fun Home(onNavigationEvent: (NavigationEvent) -> Unit) {
                     onNavigationEvent(NavigationEvent.ToSettings)
                 }
             )
-        }
+        },
+        modifier = Modifier
+            .background(MaterialTheme.colorScheme.secondary)
     ) { innerPadding ->
         Column(modifier = Modifier.padding(innerPadding)) {
             exercises.forEach { exercise ->
