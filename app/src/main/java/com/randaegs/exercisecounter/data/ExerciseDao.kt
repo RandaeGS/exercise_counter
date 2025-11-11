@@ -21,7 +21,7 @@ interface ExerciseDao {
         ORDER BY random() 
         LIMIT 1
     """)
-    fun searchRandomExercise() : Exercise
+    fun searchRandomExercise() : Exercise?
 
     @Update
     fun update(vararg exercise: Exercise)

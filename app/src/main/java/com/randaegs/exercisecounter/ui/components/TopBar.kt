@@ -87,6 +87,11 @@ private suspend fun addExerciseCount(context: Context) {
             .exerciseDao()
         val updatedExercise = dao.searchRandomExercise()
 
+        if (updatedExercise == null){
+            SnackbarController.showAsync("First add an exercise")
+            return@withContext
+        }
+
         updatedExercise.quantity += updatedExercise.increment
         dao.update(updatedExercise)
         SnackbarController.showAsync(
