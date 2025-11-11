@@ -109,9 +109,12 @@ fun ExerciseItem(exercise: Exercise) {
         }
 
         if (contextExerciseId != null) {
-            ExerciseActionsSheet {
-                contextExerciseId = null
-            }
+            ExerciseActionsSheet(
+                onDismissedSheet = {
+                    contextExerciseId = null
+                },
+                exercise = exercise
+            )
         }
     }
 }
