@@ -46,7 +46,7 @@ fun ExerciseItem(exercise: Exercise) {
     val scope = rememberCoroutineScope()
     val context = LocalContext.current
     val haptics = LocalHapticFeedback.current
-    var contextExerciseId by rememberSaveable { mutableStateOf<Int?>(null)}
+    var contextExerciseId by rememberSaveable { mutableStateOf<Int?>(null) }
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -108,7 +108,7 @@ fun ExerciseItem(exercise: Exercise) {
             }
         }
 
-        if (contextExerciseId != null){
+        if (contextExerciseId != null) {
             ExerciseActionsSheet {
                 contextExerciseId = null
             }
@@ -118,16 +118,18 @@ fun ExerciseItem(exercise: Exercise) {
 
 private suspend fun subtractExerciseQuantity(exercise: Exercise, context: Context) {
     withContext(Dispatchers.IO) {
-        val dao = AppDatabase.getDatabase(context)
-            .exerciseDao()
+        val dao = AppDatabase.getDatabase(context).exerciseDao()
         val updated = exercise.copy(
-            quantity = exercise.quantity - exercise.increment
+            quantity = (exercise.quantity - exercise.increment).coerceAtLeast(0)
         )
+
         dao.update(updated)
-        SnackbarController.showAsync(
-            """
-        ${exercise.name.replaceFirstChar { it.uppercase() }}: ${exercise.increment} DONE
-    """.trimIndent()
-        )
+        val message = if (updated.quantity == 0) {
+            "All done"
+        } else {
+            "${exercise.name.replaceFirstChar { it.uppercase() }}: ${exercise.increment} DONE"
+        }
+
+        SnackbarController.showAsync(message)
     }
 }
