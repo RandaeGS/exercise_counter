@@ -104,10 +104,10 @@ fun RemoveAlertDialog(
     val scope = rememberCoroutineScope()
     AlertDialog(
         title = {
-            Text(dialogTitle)
+            Text(dialogTitle, color = Color.White)
         },
         text = {
-            Text(dialogText)
+            Text(dialogText, color = Color.White)
         },
         onDismissRequest = {
             onDismissRequest()
