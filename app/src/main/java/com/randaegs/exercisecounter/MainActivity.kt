@@ -34,9 +34,8 @@ fun MainScreen() {
             Home(
                 onNavigationEvent = { event ->
                     when (event) {
-                        NavigationEvent.GoBack -> navController.popBackStack()
                         NavigationEvent.ToSettings -> navController.navigate(Routes.Settings.route)
-                        else -> null
+                        else -> Unit
                     }
                 }
             )
@@ -45,10 +44,13 @@ fun MainScreen() {
         composable(Routes.Settings.route) {
             Settings(
                 onNavigationEvent = { event ->
-                    when(event) {
+                    when (event) {
                         NavigationEvent.GoBack -> navController.popBackStack()
-                        NavigationEvent.ToHome -> navController.navigate(Routes.Home.route)
-                        else -> null
+                        NavigationEvent.ToHome -> navController.navigate(Routes.Home.route) {
+                            popUpTo(Routes.Home.route) { inclusive = true }
+                            launchSingleTop = true
+                        }
+                        else -> Unit
                     }
                 }
             )
