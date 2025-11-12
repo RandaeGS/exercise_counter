@@ -12,6 +12,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import com.randaegs.exercisecounter.ui.theme.danger
 
 @Composable
@@ -34,6 +35,7 @@ fun ExerciseCounterScaffold(
                 Snackbar(
                     snackbarData = data,
                     containerColor = MaterialTheme.colorScheme.tertiary,
+                    contentColor = Color.Black,
                     actionColor = danger
                 )
             }
